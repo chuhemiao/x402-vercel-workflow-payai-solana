@@ -117,7 +117,7 @@ async function createUsdcTransferInstructions(
   const receiverAta = await getAssociatedTokenAddress(mint, receiver);
   const payerAtaInfo = await connection.getAccountInfo(payerAta, 'confirmed');
   if (!payerAtaInfo) {
-    throw new Error('钱包缺少 USDC 账户，请先在钱包中创建或持有 USDC');
+    throw new Error('Wallet is missing a USDC token account; please create or fund one first');
   }
 
   const instructions: TransactionInstruction[] = [];

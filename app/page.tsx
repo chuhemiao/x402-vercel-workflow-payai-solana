@@ -14,7 +14,7 @@ export default function Page() {
         amount={0.1}
         currency='USDC'
         description='AI Agent Task Access'>
-        <div>✅ 你已成功解锁内容，可以访问 Premium Agent 或高级功能。</div>
+        <div>✅ You successfully unlocked the content; Premium Agent and advanced features are now available.</div>
       </PaywallGate>
     </main>
   );

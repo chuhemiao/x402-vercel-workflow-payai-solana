@@ -28,7 +28,7 @@ export default function PaywallGate({
 
   const handlePay = useCallback(async () => {
     if (!publicKey) {
-      alert('请先连接钱包');
+      alert('Please connect your wallet first');
       return;
     }
     try {
@@ -39,17 +39,17 @@ export default function PaywallGate({
         payer: publicKey,
         receiver: RECEIVER,
         amount,
-        currency, // 'SOL' 或 'USDC'
+        currency, // 'SOL' or 'USDC'
         memo: description,
         cluster: SOLANA_CLUSTER
       });
 
-      // ✅ 钱包签名 + 发送
+      // ✅ Sign and submit via wallet
       const signature = await sendTransaction(tx, connection);
       await connection.confirmTransaction(signature, 'confirmed');
       setTxSig(signature);
 
-      // ✅ 支付后触发后端工作流
+      // ✅ Trigger backend workflow after payment
       await fetch('/api/run-workflow', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -63,7 +63,7 @@ export default function PaywallGate({
       setUnlocked(true);
     } catch (err) {
       console.error(err);
-      alert('支付失败或被拒签');
+      alert('Payment failed or signature was rejected');
     } finally {
       setLoading(false);
     }
@@ -73,7 +73,7 @@ export default function PaywallGate({
     return (
       <div className='p-4 border rounded-2xl'>
         <div className='text-sm text-neutral-500 mb-2'>
-          已解锁 (tx: {txSig?.slice(0, 8)}…)
+          Unlocked (tx: {txSig?.slice(0, 8)}...)
         </div>
         {children}
       </div>
@@ -83,13 +83,13 @@ export default function PaywallGate({
   return (
     <div className='p-6 border rounded-2xl'>
       <div className='mb-3 font-medium'>
-        解锁内容需要支付：{amount} {currency}
+        Payment required to unlock: {amount} {currency}
       </div>
       <button
         disabled={loading}
         onClick={handlePay}
         className='px-4 py-2 bg-black text-white rounded-lg'>
-        {loading ? '支付中…' : '立即支付'}
+        {loading ? 'Processing...' : 'Pay now'}
       </button>
     </div>
   );

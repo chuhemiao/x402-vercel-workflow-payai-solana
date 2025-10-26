@@ -31,8 +31,8 @@ It demonstrates how to use the x402 protocol to handle on-chain payments and tri
 ## 🛠️ Setup & Run
 
 ```bash
-# Unzip or clone the project
-cd x402_workflow_integration_devnet
+# clone the project
+cd x402-vercel-workflow-payai-solana
 
 # Install dependencies
 pnpm install
@@ -82,7 +82,7 @@ const tx = await createX402Transaction({
   payer: publicKey,
   receiver: RECEIVER,
   amount,
-  currency, // 'SOL' 或 'USDC'
+  currency, // 'SOL' or 'USDC'
   memo: description,
   cluster: SOLANA_CLUSTER
 });
@@ -143,15 +143,6 @@ package.json
 - **Mainnet deployment:** switch network and update receiver key
 - **Transaction verification:** validate `txSignature` on backend to prevent spoofing
 - **Custom unlock logic:** display NFT, subscription, or AI-agent features after payment
-
----
-
-## ⚠️ Notes
-
-- Use `createX402Client()`, **not** `createX402Transaction()` (removed in v0.1.1).
-- Ensure the wallet is connected to the correct network.
-- For USDC payments, ensure you hold devnet USDC test tokens.
-- This demo is **for development/testing only** — not production-grade financial use.
 
 ---
 

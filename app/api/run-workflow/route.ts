@@ -5,7 +5,7 @@ export async function POST(req: NextRequest) {
   try {
     const { txSignature, wallet, feature } = await req.json();
     if (!txSignature || !wallet) {
-      return NextResponse.json({ error: '参数错误' }, { status: 400 });
+      return NextResponse.json({ error: 'Invalid parameters' }, { status: 400 });
     }
     await triggerWorkflow({ txSignature, wallet, feature });
     return NextResponse.json({ ok: true });
